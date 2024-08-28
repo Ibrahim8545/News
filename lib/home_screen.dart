@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/api_manger.dart';
+import 'package:newsapp/app_colors.dart';
+import 'package:newsapp/widget/news_ui.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home_screen';
@@ -6,6 +9,35 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        image: DecorationImage(
+          
+          image: AssetImage('assets/images/home.png'), 
+          fit: BoxFit.cover),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+         drawer:Drawer(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          title: const Text('News'),
+          centerTitle: true,
+          backgroundColor: AppColors.green,
+          shape:const  RoundedRectangleBorder(
+            borderRadius:BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            )
+             ),
+             actions: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+             ],
+            
+        ),
+        body: NewsUi()
+      ),
+    );
   }
 }
