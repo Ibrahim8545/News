@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/api_manger.dart';
-import 'package:newsapp/app_colors.dart';
+import 'package:newsapp/utils/app_colors.dart';
 import 'package:newsapp/widget/news_ui.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,10 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.white,
         image: DecorationImage(
           
-          image: AssetImage('assets/images/home.png'), 
+          image: AssetImage('assets/images/pattern.png'), 
           fit: BoxFit.cover),
       ),
       child: Scaffold(
@@ -22,7 +21,15 @@ class HomeScreen extends StatelessWidget {
          drawer:Drawer(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          title: const Text('News'),
+          title: const Text(
+            'News',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.bold
+              ),
+
+            ),
           centerTitle: true,
           backgroundColor: AppColors.green,
           shape:const  RoundedRectangleBorder(
