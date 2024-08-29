@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/utils/app_colors.dart';
+import 'package:newsapp/widget/categories_tab.dart';
 import 'package:newsapp/widget/news_ui.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
              ],
             
         ),
-        body: NewsUi()
+        body:CategorysTab()
       ),
     );
   }

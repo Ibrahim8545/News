@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/home_screen.dart';
 import 'package:newsapp/splash_screen.dart';
+import 'package:newsapp/widget/categories_tab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes:{
       
         HomeScreen.routeName : (context) => const HomeScreen(),
+        CategorysTab.routeName : (context) =>  CategorysTab(),
       }
 
     );
