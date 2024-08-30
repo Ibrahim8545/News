@@ -5,7 +5,8 @@ import 'package:newsapp/widget/news_item.dart';
 import 'package:newsapp/widget/tabs_item.dart';
 
 class NewsUi extends StatefulWidget {
-  NewsUi({super.key});
+  String id;
+  NewsUi({required this.id, super.key});
 
   @override
   State<NewsUi> createState() => _NewsUiState();
@@ -17,7 +18,7 @@ class _NewsUiState extends State<NewsUi> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.getSources(),
+        future: ApiManager.getSources(widget.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

@@ -6,9 +6,15 @@ import 'package:newsapp/utils/constants.dart';
 class ApiManager
 {
   //https://newsapi.org/v2/top-headlines/sources?apiKey=
-static Future<SourcesResponseModel>getSources()async
+static Future<SourcesResponseModel>getSources(String id)async
 {
-  Uri url=Uri.https(constants.baseUrl,'/v2/top-headlines/sources',{'apiKey':constants.apiKey});
+  Uri url=Uri.https(constants.baseUrl,
+  '/v2/top-headlines/sources',
+  {
+    'apiKey':constants.apiKey,
+    'category':id,
+    }
+  );
  
 http.Response response=await http.get(url);
 

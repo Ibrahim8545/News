@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
     home:const  SplashScreen(),
       routes:{
       
-        HomeScreen.routeName : (context) => const HomeScreen(),
-        CategorysTab.routeName : (context) =>  CategorysTab(),
+        HomeScreen.routeName : (context) =>  HomeScreen(),
+        // CategorysTab.routeName : (context) =>  CategorysTab(),
       }
 
     );

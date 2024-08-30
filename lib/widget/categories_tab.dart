@@ -4,7 +4,8 @@ import 'package:newsapp/widget/category_items.dart';
 
 class CategorysTab extends StatelessWidget {
   static const String routeName = '/categorys_tab';
-   CategorysTab({  super.key});
+   CategorysTab({required this.onclick  ,super.key});
+    Function onclick;
 var  categoryModel=CategoryModel.getCategoryModel();
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,16 @@ var  categoryModel=CategoryModel.getCategoryModel();
                 mainAxisSpacing: 12
               ) , 
               itemBuilder: (context, index) {
-                return CategoryItems(
-                  categoryModel: categoryModel[index],
-                  isOdd: index.isOdd,
-                  );
+                return GestureDetector(
+                  onTap:()
+                  {
+                     onclick(categoryModel[index]);
+                  },
+                  child: CategoryItems(
+                    categoryModel: categoryModel[index],
+                    isOdd: index.isOdd,
+                    ),
+                );
               },
               itemCount: categoryModel.length,
               ),

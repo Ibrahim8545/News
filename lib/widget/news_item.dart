@@ -18,7 +18,11 @@ class NewsItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(articles.urlToImage??'')),
+            child: Image.network(
+              articles.urlToImage??'',
+              height: 240,
+              )
+            ),
           Text(
             articles.source?.name??'',
             style: TextStyle(
