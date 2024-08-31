@@ -5,7 +5,7 @@ class HomeInitial extends HomeState {}
 class HomeGetSourcesLoading extends HomeState {}
 class HomeGetSourcesSucess extends HomeState {}
 class HomeGetSourcesError extends HomeState {}
-
+class HomeChangeSource extends HomeState{}
 
 
 

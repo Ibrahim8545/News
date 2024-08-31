@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsapp/bloc/observer.dart';
 import 'package:newsapp/home_screen.dart';
 import 'package:newsapp/splash_screen.dart';
 import 'package:newsapp/widget/categories_tab.dart';
 
 void main() {
+    Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 

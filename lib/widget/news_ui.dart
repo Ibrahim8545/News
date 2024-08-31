@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:newsapp/api_manger.dart';
 import 'package:newsapp/bloc/cubit.dart';
 import 'package:newsapp/bloc/states.dart';
-import 'package:newsapp/models/sources_response_model.dart';
 import 'package:newsapp/widget/news_item.dart';
 import 'package:newsapp/widget/tabs_item.dart';
 
@@ -12,7 +10,7 @@ class NewsUi extends StatelessWidget {
   String id;
   NewsUi({required this.id, super.key});
 
-  List<Sources> sources = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +20,34 @@ class NewsUi extends StatelessWidget {
         create: (context) => HomeCubit()..getSources(id),
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
-            if(state is HomeGetNewsDataLoading ||state is HomeGetSourcesLoading)
-            {
-             context.loaderOverlay.show();
-
-            }
-            else{
+          if (state is HomeGetSourcesLoading ||
+                state is HomeGetNewsDataLoading) {
+              context.loaderOverlay.show();
+            } else {
               context.loaderOverlay.hide();
+            }
+
+            if (state is HomeGetNewsDataError) {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("Error"),
+                  content: Text("Something went wrong"),
+                ),
+              );
+            }
+
+            if (state is HomeGetSourcesError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Something went wrong")));
+            }
+
+            if (state is HomeChangeSource) {
+              HomeCubit.get(context).getNewsData(HomeCubit.get(context)
+                      .model
+                      ?.sources?[HomeCubit.get(context).Selected]
+                      .id ??
+                  "");
             }
           },
           builder: (context, state) {
@@ -39,7 +58,7 @@ class NewsUi extends StatelessWidget {
                   length: HomeCubit.get(context).model?.sources?.length ?? 0,
                   child: TabBar(
                     onTap: (value) {
-               
+                       HomeCubit.get(context).changeSource(value);
                     },
                     isScrollable: true,
                     indicatorColor: Colors.transparent,
@@ -50,12 +69,44 @@ class NewsUi extends StatelessWidget {
                         ?.map(
                           (e) => TabsItem(
                             sources: e,
-                            isSelected:  HomeCubit.get(context).model!.sources!.elementAt(0)==e,
+                            isSelected:  HomeCubit.get(context).model?.
+                            sources?.
+                            elementAt(HomeCubit.get(context).Selected)==e,
                           ),
                         )
                         .toList()??[],
                   ),
-                )
+                ),
+                  Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 8,
+                      ),
+                      itemBuilder: (context, index) {
+                        return NewsItem(
+                            articles: HomeCubit.get(context)
+                                .newsdata!
+                                .articles![index]);
+                      },
+                      itemCount: HomeCubit.get(context)
+                              .newsdata
+                              ?.articles
+                              ?.length ??
+                          0,
+                    ),
+                  )
+
+                // Expanded(
+                //         child: ListView.separated(
+
+                //             separatorBuilder: (context, index) =>const  SizedBox(height: 8,),
+                //             itemCount: HomeCubit.get(context).newsdata!.articles?.length??0,
+                //             itemBuilder: (context, index) {
+                //               return (NewsItem(articles: HomeCubit.get(context).newsdata!.articles![index]));
+                //             }),
+                //       )
+
+
               ]),
             );
           },
@@ -110,15 +161,15 @@ class NewsUi extends StatelessWidget {
     //                   }
     //                   var articles = snapshot.data?.articles ?? [];
 
-    //                   return Expanded(
-    //                     child: ListView.separated(
+                      // return Expanded(
+                      //   child: ListView.separated(
 
-    //                         separatorBuilder: (context, index) =>const  SizedBox(height: 8,),
-    //                         itemCount: articles.length,
-    //                         itemBuilder: (context, index) {
-    //                           return (NewsItem(articles: articles[index]));
-    //                         }),
-    //                   );
+                      //       separatorBuilder: (context, index) =>const  SizedBox(height: 8,),
+                      //       itemCount: articles.length,
+                      //       itemBuilder: (context, index) {
+                      //         return (NewsItem(articles: articles[index]));
+                      //       }),
+                      // );
     //                 }),
     //           ],
     //         ),

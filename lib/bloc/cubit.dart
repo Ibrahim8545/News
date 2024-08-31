@@ -13,56 +13,50 @@ SourcesResponseModel? model;
 NewsDataResponsoneModel? newsdata;
   int Selected = 0;
   static HomeCubit get(context)=>BlocProvider.of(context);
- Future<void>getSources(String id)async
-{
-  try
-  {
+
+  changeSource(int value) {
+    Selected = value;
+    emit(HomeChangeSource());
+  }
+
+ Future<void> getSources(String id) async {
+  try {
     emit(HomeGetSourcesLoading());
-    
-  Uri url=Uri.https(constants.baseUrl,
-  '/v2/top-headlines/sources',
-  {
-    'apiKey':constants.apiKey,
-    'category':id,
-    }
-  );
- 
-http.Response response=await http.get(url);
+    Uri url = Uri.https(
+      constants.baseUrl,
+      '/v2/top-headlines/sources',
+      {'apiKey': constants.apiKey, 'category': id},
+    );
 
-  var json=jsonDecode(response.body);
-   model=SourcesResponseModel.fromJson(json);
+    http.Response response = await http.get(url);
+    var json = jsonDecode(response.body);
+    model = SourcesResponseModel.fromJson(json);
 
-emit(HomeGetSourcesSucess());
-  }catch(e){
+    emit(HomeGetSourcesSucess());
+      getNewsData(model?.sources?[Selected].id ?? "");
+
+  } catch (e) {
     emit(HomeGetSourcesError());
   }
 }
 
-
- Future<void> getNewsData(String sourceID)async
-{
-    try {
-      emit(HomeGetNewsDataLoading());
-       Uri url=Uri.https(
-    'newsapi.org',
-    "/v2/everything",
-    {
-      'sources':sourceID,
-      'apiKey':constants.apiKey,
-      
-    },
-    
-
+Future<void> getNewsData(String sourceID) async {
+  try {
+    emit(HomeGetNewsDataLoading());
+    Uri url = Uri.https(
+      'newsapi.org',
+      '/v2/everything',
+      {'sources': sourceID, 'apiKey': constants.apiKey},
     );
-   http.Response response=await http.get(url);
 
-  var json=jsonDecode(response.body);
-  NewsDataResponsoneModel newsdata=NewsDataResponsoneModel.fromJson(json);
-  emit(HomeGetNewsDatasSucess());
-    } catch (e) {
-      emit(HomeGetNewsDataError()); 
-    }
+    http.Response response = await http.get(url);
+    var json = jsonDecode(response.body);
+    newsdata = NewsDataResponsoneModel.fromJson(json);
 
+    emit(HomeGetNewsDatasSucess());
+  } catch (e) {
+    emit(HomeGetNewsDataError());
+  }
 }
 
 }
