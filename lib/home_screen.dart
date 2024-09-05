@@ -4,6 +4,7 @@ import 'package:newsapp/utils/app_colors.dart';
 import 'package:newsapp/widget/categories_tab.dart';
 import 'package:newsapp/widget/drawer_item.dart';
 import 'package:newsapp/widget/news_ui.dart';
+import 'package:newsapp/widget/search_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home_screen';
@@ -49,8 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: SearchTab());
+
+              },
+              icon: Icon(Icons.search,size: 30,),
             ),
           ],
         ),
