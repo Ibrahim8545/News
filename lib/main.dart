@@ -4,6 +4,7 @@ import 'package:newsapp/bloc/observer.dart';
 import 'package:newsapp/home_screen.dart';
 import 'package:newsapp/splash_screen.dart';
 import 'package:newsapp/widget/categories_tab.dart';
+import 'package:newsapp/widget/news_screen_details.dart';
 
 void main() {
     Bloc.observer = MyBlocObserver();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes:{
       
         HomeScreen.routeName : (context) =>  HomeScreen(),
+        NeswsScreenDetails.routeName : (context) =>  NeswsScreenDetails(),
         // CategorysTab.routeName : (context) =>  CategorysTab(),
       }
 

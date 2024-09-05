@@ -13,10 +13,10 @@ var  categoryModel=CategoryModel.getCategoryModel();
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text('Pick your category of interest',style: TextStyle(fontSize: 30),),
+         const Text('Pick your category of interest',style: TextStyle(fontSize: 30),),
           Expanded(
             child: GridView.builder(
-              gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12

@@ -19,7 +19,7 @@ class DrawerItem extends StatelessWidget {
             color: Colors.green,
             width: double.infinity,
             alignment: Alignment.center,
-            child: Text(
+            child:const  Text(
               'News App',
               style: TextStyle(
                 fontSize: 30,
