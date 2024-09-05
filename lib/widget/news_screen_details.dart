@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:newsapp/models/news_data_response_model.dart';
 import 'package:newsapp/utils/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NeswsScreenDetails extends StatelessWidget {
   static const routeName = '/details';
@@ -75,16 +76,27 @@ class NeswsScreenDetails extends StatelessWidget {
           SizedBox(height: 20,),
           Text(articles.content??'',textAlign: TextAlign.justify,),
           SizedBox(height: 30,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-            Text('view full aricle'),
-
-            Icon(Icons.arrow_forward)
-          ],)
+          InkWell(
+            onTap: () {
+              _launchUrl(articles.url??'');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+              Text('view full aricle',style: TextStyle(fontSize: 24),),
+            
+              Icon(Icons.arrow_forward_ios)
+            ],),
+          )
         ],
       ),
     ),
     );
   }
+  Future<void> _launchUrl(String url) async {
+    final Uri _url = Uri.parse(url);
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
+}
 }
