@@ -44,7 +44,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       emit(HomeGetNewsDataLoading());
       Uri url = Uri.https(
-        'newsapi.org',
+        constants.baseUrl,
         '/v2/everything',
         {'sources': sourceID, 'q': query, 'apiKey': constants.apiKey},
       );

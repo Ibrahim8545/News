@@ -1,5 +1,5 @@
 class constants {
   static const String baseUrl='newsapi.org';
-  static const String apiKey='d0ba5dd3999349b996e9964fbf6225d7';
+  static const String apiKey='d63a8563462146f7992c0f964aae19c3';
 
 }

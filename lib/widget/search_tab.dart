@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:newsapp/api_manger.dart';
+
 
 import 'package:newsapp/widget/news_item.dart';
 
@@ -51,8 +51,8 @@ class SearchTab extends SearchDelegate {
   }
 
   Widget buildSearchData() {
-    return FutureBuilder(
-      future: ApiManager.getNewsData(quary:query),
+    return  FutureBuilder(
+      future: ApiManager.getNewsData(quary: query),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -84,6 +84,7 @@ class SearchTab extends SearchDelegate {
       },
     );
   }
-}
+  }
+
 
 

@@ -30,12 +30,8 @@ class NeswsScreenDetails extends StatelessWidget {
               bottomRight: Radius.circular(30),
             ),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search),
-            ),
-          ],
+         
+        
         ),
       body:  Container(
       padding: const EdgeInsets.all(8.0),
